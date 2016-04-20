@@ -6,6 +6,63 @@ import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import warnings
 
+"""
+Here you register new characters in format:
+'<char>' : (<width>, <height>, '<filename>'),
+"""
+charlist = {
+	'a' : (0.7, 1.0, 'a'),
+	'b' : (0.7, 1.0, 'b'),
+	'c' : (0.7, 1.0, 'c'),
+	'd' : (0.7, 1.0, 'd'),
+	'e' : (0.7, 1.0, 'e'),
+	'f' : (0.7, 1.0, 'f'),
+	'g' : (0.7, 1.0, 'g'),
+	'h' : (0.7, 1.0, 'h'),
+	'i' : (0.4, 1.0, 'i'),
+	'j' : (0.4, 1.0, 'j'),
+	'k' : (0.7, 1.0, 'k'),
+	'l' : (0.7, 1.0, 'l'),
+	'm' : (0.7, 1.0, 'm'),
+	'n' : (0.7, 1.0, 'n'),
+	'o' : (0.7, 1.0, 'o'),
+	'p' : (0.7, 1.0, 'p'),
+	'q' : (0.7, 1.0, 'q'),
+	'r' : (0.7, 1.0, 'r'),
+	's' : (0.7, 1.0, 's'),
+	't' : (0.7, 1.0, 't'),
+	'u' : (0.7, 1.0, 'u'),
+	'v' : (0.7, 1.0, 'v'),
+	'w' : (0.7, 1.0, 'w'),
+	'x' : (0.7, 1.0, 'x'),
+	'y' : (0.7, 1.0, 'y'),
+	'z' : (0.7, 1.0, 'z'),
+
+	'0' : (0.7, 1.0, '0'),
+	'1' : (0.5, 1.0, '1'),
+	'2' : (0.7, 1.0, '2'),
+	'3' : (0.7, 1.0, '3'),
+	'4' : (0.7, 1.0, '4'),
+	'5' : (0.7, 1.0, '5'),
+	'6' : (0.7, 1.0, '6'),
+	'7' : (0.7, 1.0, '7'),
+	'8' : (0.7, 1.0, '8'),
+	'9' : (0.7, 1.0, '9'),
+
+	' ' : (0.7, 0.0, 'space'),
+	'?' : (0.7, 1.0, 'questionmark'),
+	'!' : (0.2, 1.0, 'exclamationmark'),
+	',' : (0.1, 0.1, 'comma'),
+	'.' : (0.2, 0.1, 'fullstop'),
+	'&' : (0.6, 1.0, 'ampersand'),
+	'$' : (0.5, 1.0, 'dollar'),
+	'@' : (0.7, 1.0, 'at'),
+	'(' : (0.3, 1.0, 'brackets_open'),
+	')' : (0.3, 1.0, 'brackets_close'),
+	'#' : (0.7, 1.0, 'hash'),
+	'%' : (0.7, 1.0, 'percent'),
+}
+
 
 class Character(object):
 	"""
@@ -65,8 +122,8 @@ class TextyPloty(object):
 	jitter	- to randomize points locations, represents sigma for gaussian noise
 	spacing	- distance between letters
 	offset	- offset from zero point if format (x, y)
-	scale	- scale of the letters ()
-
+	scale	- scale/size of the letters
+	func	- function to add text to 
 	"""
 	def __init__(self, jitter=0.0, spacing=0.1, offset=(0.0, 0.0), scale=(1.0, 1.0), func=None):
 		self.jitter = jitter
@@ -75,59 +132,15 @@ class TextyPloty(object):
 		self.scale = scale
 		self.func = func
 
-		self.charlist = {
-			'a' : (0.7, 1.0, 'a'),
-			'b' : (0.7, 1.0, 'b'),
-			'c' : (0.7, 1.0, 'c'),
-			'd' : (0.7, 1.0, 'd'),
-			'e' : (0.7, 1.0, 'e'),
-			'f' : (0.7, 1.0, 'f'),
-			'g' : (0.7, 1.0, 'g'),
-			'h' : (0.7, 1.0, 'h'),
-			'i' : (0.4, 1.0, 'i'),
-			'j' : (0.4, 1.0, 'j'),
-			'k' : (0.7, 1.0, 'k'),
-			'l' : (0.7, 1.0, 'l'),
-			'm' : (0.7, 1.0, 'm'),
-			'n' : (0.7, 1.0, 'n'),
-			'o' : (0.7, 1.0, 'o'),
-			'p' : (0.7, 1.0, 'p'),
-			'q' : (0.7, 1.0, 'q'),
-			'r' : (0.7, 1.0, 'r'),
-			's' : (0.7, 1.0, 's'),
-			't' : (0.7, 1.0, 't'),
-			'u' : (0.7, 1.0, 'u'),
-			'v' : (0.7, 1.0, 'v'),
-			'w' : (0.7, 1.0, 'w'),
-			'x' : (0.7, 1.0, 'x'),
-			'y' : (0.7, 1.0, 'y'),
-			'z' : (0.7, 1.0, 'z'),
+		self.charlist = charlist
 
-			'0' : (0.7, 1.0, '0'),
-			'1' : (0.5, 1.0, '1'),
-			'2' : (0.7, 1.0, '2'),
-			'3' : (0.7, 1.0, '3'),
-			'4' : (0.7, 1.0, '4'),
-			'5' : (0.7, 1.0, '5'),
-			'6' : (0.7, 1.0, '6'),
-			'7' : (0.7, 1.0, '7'),
-			'8' : (0.7, 1.0, '8'),
-			'9' : (0.7, 1.0, '9'),
+	"""
+	ARGUMENTS
+	text	- string to plot
 
-			' ' : (0.7, 0.0, 'space'),
-			'?' : (0.7, 1.0, 'questionmark'),
-			'!' : (0.2, 1.0, 'exclamationmark'),
-			',' : (0.1, 0.1, 'comma'),
-			'.' : (0.2, 0.1, 'fullstop'),
-			'&' : (0.6, 1.0, 'ampersand'),
-			'$' : (0.5, 1.0, 'dollar'),
-			'@' : (0.7, 1.0, 'at'),
-			'(' : (0.3, 1.0, 'brackets_open'),
-			')' : (0.3, 1.0, 'brackets_close'),
-			'#' : (0.7, 1.0, 'hash'),
-			'%' : (0.7, 1.0, 'percent'),
-		}
-	
+	RETURNS
+	xs, ys	- points coordinates
+	"""
 	def get(self, text):
 		xs, ys = [], []
 
@@ -159,7 +172,9 @@ class TextyPloty(object):
 
 
 class ResidualsPlot(object):
-	"""docstring for ResidualsPlot"""
+	"""
+
+	"""
 	def __init__(self, data=([],[]), datastyle='k.', xs_fit=[], func=None, fitstyle='r-', \
 		xlabel='', ylabel='', reslabel='', ratio=[4, 1], figsize=(10,6), axis=None, res_axis=None, \
 		fitlabel='fit', datalabel='points'):
