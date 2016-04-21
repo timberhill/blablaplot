@@ -23,4 +23,6 @@ Result:
 ## extension
 
 To add a character you just create `.dat` file in `chars` folder with two columns (x and y coordinates of the points).
-Also you need to register it in `charlist` dictionary in `blablaplot.py` in format: `'<char>' : (<width>, <height>, '<filename>'),`, where `<char>` is a single char you want.
+Also you need to register it in `charlist` dictionary in `blablaplot.py` in format: `'<char>' : (<width>, <height>, '<filename>'),`, where `<char>` is a single char you want. By default all characters are in (0..1,  0..1) box.
+
+> I found [WebPlotDigitizer by Ankit Rohatgi](http://arohatgi.info/WebPlotDigitizer/app/) very useful for creating characters. Calibrate axis on any image (default, for instance) to be (0..1,  0..1), add points, view data (you can also format it), and save the `.dat` file.
