@@ -12,7 +12,7 @@ All (limited number of) characters are stored in separate `.dat` files in `chars
 
 how to get the points:
 ```python
-from blablaplot import TextyPloty, ResidualsPlot
+from blablaplot import TextyPloty
 a = TextyPloty(spacing=0.2, offset=(0.1, -0.05), scale=(0.5, 0.1), func=lambda x: f(x, arg1, arg2), jitter=0.0)
 xs, ys = a.get('hello world !')
 ```
