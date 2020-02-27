@@ -1,4 +1,7 @@
-This small piece of python script generates a plot with text in form of points. You can also add it to any function and behold residuals. Looks crappy, but it's intended.
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/timberhill/blablaplot/binder)
+
+This small piece of python script generates a plot with text in form of points. You can also add it to any 
+function and behold residuals. Looks crappy, but it's intended.
 
 ## description
 
