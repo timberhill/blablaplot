@@ -110,7 +110,7 @@ class Character(object):
 		ymin = min(self.ys)
 		ymax = max(self.ys)
 
-		for i in xrange(0, len(self.xs)):
+		for i in range(0, len(self.xs)):
 			self.xs[i] = self.size[0] * (self.xs[i] - xmin) / (xmax - xmin)
 			self.ys[i] = self.size[1] * (self.ys[i] - ymin) / (ymax - ymin)
 
@@ -161,7 +161,7 @@ class TextyPloty(object):
 			xoffset += self.spacing * self.scale[0]
 
 		if self.func != None:
-			for i in xrange(0,len(xs)):
+			for i in range(0,len(xs)):
 				ys[i] += self.func(xs[i])
 
 		if self.jitter > 0:			
